@@ -1,4 +1,14 @@
-function addTaskToProjectEvent(e){
+import {    checkProjectListForActiveProject, 
+            createTaskArray, 
+            sidebarButtons, 
+            projectList,
+            viewContainer,
+            addButton,
+            removeAllChildren
+} from "./utils";
+
+
+export function addTaskToProjectEvent(e){
     const taskName = prompt("Please enter TaskName: ")
     const taskDueDate = prompt("Please enter due date: ")
 
@@ -9,7 +19,7 @@ function addTaskToProjectEvent(e){
 
     if (activeProject){
         const projectId = activeProject.attributes.data.value
-        const projectObject = theTODOLIST["projects"][projectId]
+        const projectObject = defaultToDoList["projects"][projectId]
         projectObject.addTask(newTask)
         console.log("task added succesfully")
 
@@ -17,11 +27,12 @@ function addTaskToProjectEvent(e){
     }else console.log("no active project found")
 }
 
-function addProjectToTodoListEvent(){
+export function addProjectToTodoListEvent(e){
+    console.log(e)
     const projectName = prompt("Enter Project Name: ")
-    newProject = new Project(projectName)
+    const newProject = new Project(projectName)
 
-    theTODOLIST.addProject(newProject)
+    defaultToDoList.addProject(newProject)
 
 }
 
@@ -29,8 +40,8 @@ export function allTasksEvent(e){
     const projectListElements = Array.from(projectList.children)
     projectListElements.forEach((e)=>e.attributes.active.value = "false")
     removeAllChildren(viewContainer)
-    const allProjectTaskArray = theTODOLIST.allTasks()
-    renderTaskArray(allProjectTaskArray).forEach((e)=>viewContainer.appendChild(e))
+    const allProjectTaskArray = defaultToDoList.allTasks()
+    createTaskArray(allProjectTaskArray).forEach((e)=>viewContainer.appendChild(e))
     console.log("rendered")
 }
 
@@ -43,6 +54,6 @@ function projectListClickEvent(e){
 
 }
 
-sidebarButtons[0].addEventListener("click", allTasksEvent)
-sidebarButtons[3].addEventListener("click", addProjectToTodoListEvent)
-addButton.addEventListener("click", addTaskToProjectEvent)
+// sidebarButtons[0].addEventListener("click", allTasksEvent)
+// sidebarButtons[3].addEventListener("click", addProjectToTodoListEvent)
+// addButton.addEventListener("click", addTaskToProjectEvent)

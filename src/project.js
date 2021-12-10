@@ -3,7 +3,7 @@ export default class Project{
     constructor(projectName){
         this.name = projectName
         this.projectId = Project.incrementId()
-        this.creationDate = new Date().toLocaleDateString()
+        this.creationDate = new Date().toLocaleDateString("de-DE")
         this.tasks = []
     }
 

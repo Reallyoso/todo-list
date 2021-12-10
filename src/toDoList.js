@@ -5,7 +5,6 @@ export default class ToDoList{
 
     addProject(val){
         this.projects.push(val)
-        // renderTodoList(theTODOLIST)
     }
 
     removeProject(val){

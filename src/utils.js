@@ -1,3 +1,7 @@
+import ToDoList from "./toDoList"
+import Project from "./project"
+import Task from "./task"
+
 export const sidebarButtons = document.querySelectorAll(".sidebar-button")
 export const projectList = document.querySelector(".project-ul")
 export const viewContainer = document.querySelector(".view-container")
@@ -102,3 +106,61 @@ export function createProjectListElement(newProject){
     return listElement
 }
 
+export function filterTasksByDates(_toDoList=defaultToDoList){
+    if(!(_toDoList instanceof ToDoList)) throw Error("Not an Instance of ToDoList")
+    // const tempToDo = Object.assign({}, _toDoList)
+    // const projects = tempToDo.projects
+    // const projectArr = []
+    
+    // for(const project of projects){
+    //     project.tasks = project.tasks.filter(task=>task.dueDate == "10.12.2021")
+    //     projectArr.push(project)
+    // }
+
+    // tempToDo.projects = projectArr
+    // return tempToDo
+
+
+    // WORKING FOR TASKS ONLY NO CONNECTION TO PROJECT
+
+    const allTasks = _toDoList.allTasks()
+    const dateToday = new Date().toLocaleDateString("de-DE")
+    const allTasksToday = allTasks.filter((e)=>{
+        if(e.dueDate == dateToday) return true
+    })
+    return allTasksToday
+}
+
+
+
+// defaultToDoList.projects.filter((e)=>{
+//     if (e.tasks.filter((r)=>{
+//       if(r.dueDate == "10.12.2021") return true
+//     }))return true
+//   })
+
+
+// defaultToDoList.projects.forEach((project)=>{
+//     const test = project
+//     test.task = test.filter((task)=>task.dueDate == "10.12.2021")
+//     return test
+// })
+
+// for(project of defaultToDoList.projects){
+//     const dummy = project
+//     dummy.tasks = dummy.tasks.filter(task=>task.dueDate == "10.12.2021")
+//     return dummy
+// }
+
+export function testo(){
+    const tempToDo = new ToDoList()
+    let i = 0
+    for(const project of defaultToDoList.projects){
+        tempToDo.addProject(project)
+        const sa = defaultToDoList.projects[0].tasks.filter(t=>t.dueDate == "10.12.2021")
+        tempToDo.projects[i].tasks = sa
+        i++
+    }
+
+    return tempToDo
+}

@@ -3,7 +3,7 @@ export default class Task{
         this.name = name
         // maybe add id
         // this.creationDateObject = new Date()
-        this.creationDate = new Date().toLocaleDateString()
+        this.creationDate = new Date().toLocaleDateString("de-DE")
         this.dueDate = dueDate
         this.isDone = false
     }
