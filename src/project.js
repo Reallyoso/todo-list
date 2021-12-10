@@ -4,6 +4,7 @@ export default class Project{
         this.name = projectName
         this.projectId = Project.incrementId()
         this.creationDate = new Date().toLocaleDateString("de-DE")
+        this.creationDateEpoch = new Date().getTime()
         this.tasks = []
     }
 

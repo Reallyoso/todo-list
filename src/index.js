@@ -3,7 +3,7 @@ import Project from "./project"
 import ToDoList from "./toDoList.js"
 import * as utils from "./utils"
 import { sidebarButtons, projectList ,viewContainer, addButton} from "./utils"
-import {renderTodoList, renderToday} from "./render"
+import {renderTodoList, renderToday, renderWeek} from "./render"
 import {allTasksEvent, addProjectToTodoListEvent, addTaskToProjectEvent} from "./eventHandlers"
 
 const defaultTask = new Task("Default", "1.12.2021")
@@ -25,6 +25,7 @@ defaultToDoList.addProject(defaultProjectTwo)
 
 sidebarButtons[0].addEventListener("click",(e) => renderTodoList(e,defaultToDoList))
 sidebarButtons[1].addEventListener("click", renderToday)
+sidebarButtons[2].addEventListener("click", renderWeek)
 sidebarButtons[3].addEventListener("click", addProjectToTodoListEvent)
 addButton.addEventListener("click", addTaskToProjectEvent)
 

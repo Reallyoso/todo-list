@@ -1,5 +1,5 @@
 import ToDoList from "./toDoList"
-import { removeAllChildren, createProjectListElement, createProjectArray, createTaskArray,filterTasksByDates } from "./utils"
+import { removeAllChildren, createProjectListElement, createProjectArray, createTaskArray,filterTasksToday,filterTasksWeek } from "./utils"
 
 
 export function renderTodoList(e,_todoList){
@@ -31,7 +31,16 @@ export function renderTodoList(e,_todoList){
 // }
 
 export function renderToday(e){
-    const toRender = createTaskArray(filterTasksByDates())
+    let toRender = createTaskArray(filterTasksToday())
+    if (toRender.length == 0) console.log("toRender empty")
+    const mainView = document.querySelector(".view-container")
+    removeAllChildren(mainView)
+
+    toRender.forEach(el=>mainView.appendChild(el))
+}
+
+export function renderWeek(e){
+    const toRender = createTaskArray(filterTasksWeek())
     const mainView = document.querySelector(".view-container")
     removeAllChildren(mainView)
 

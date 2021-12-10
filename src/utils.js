@@ -106,7 +106,7 @@ export function createProjectListElement(newProject){
     return listElement
 }
 
-export function filterTasksByDates(_toDoList=defaultToDoList){
+export function filterTasksToday(_toDoList=defaultToDoList){
     if(!(_toDoList instanceof ToDoList)) throw Error("Not an Instance of ToDoList")
     // const tempToDo = Object.assign({}, _toDoList)
     // const projects = tempToDo.projects
@@ -163,4 +163,31 @@ export function testo(){
     }
 
     return tempToDo
+}
+
+export function getCurrentWeek(){
+    const curr = new Date()
+    const first = curr.getDate()-curr.getDay() + 1
+    let firstDay = new Date(curr.setDate(first))
+    firstDay = new Date(firstDay.setHours(0,0,0,0))
+    let lastDay = new Date(curr.setDate(first+6))
+    lastDay = new Date(lastDay.setHours(23,59,59,0))
+
+    return{firstDay,lastDay}
+}
+
+export function isCurrentWeek(epochTime){
+    const week = getCurrentWeek()
+    if(epochTime >= week.firstDay.getTime() && epochTime<=week.lastDay.getTime()) return true
+    else return false
+}
+
+export function filterTasksWeek(_toDoList = defaultToDoList){
+    if(!(_toDoList instanceof ToDoList)) throw Error("Not an Instance of ToDoList")
+
+    const allTasks = _toDoList.allTasks()
+    
+    const allTasksWeek = allTasks.filter(t=>utils.isCurrentWeek(new Date(t.dueDate.split(".").reverse().join("/")).getTime()))
+    
+    return allTasksWeek
 }
