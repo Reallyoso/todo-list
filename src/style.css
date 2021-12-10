@@ -1,0 +1,65 @@
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    background-color: grey;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+ul, li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#content-container{
+    flex-grow: 1;
+    display: flex;
+}
+
+.sidebar-container{
+    width: 20%;
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+}
+
+.view-container{
+    flex-grow: 1;
+}
+
+.task-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+footer{
+    background-color: grey;
+}
+
+
+/*experimentalshit*/
+p input {
+  border: none;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: none;
+  width: auto;
+  background-color: blue;
+}
+
+.project-li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
