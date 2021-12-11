@@ -45,13 +45,12 @@ export function allTasksEvent(e){
     console.log("rendered")
 }
 
-function projectListClickEvent(e){
+export function projectListClickEvent(e){
     if(e.target.tagName == "SPAN") return console.log("span")
-    const projectListElements = Array.from(projectList.children)
-    projectListElements.forEach((e)=>e.attributes.active.value = "false")
-    e.target.attributes.active.value = "true"
+    const projectListElements = Array.from(document.querySelector(".project-ul").children)
+    projectListElements.forEach((el)=>el.attributes["active"].value = "false")
+    e.target.parentElement.attributes.active.value = "true"
     // NEEDS TO CONTAIN LOGIC TO RENDER ONLY THE PROJECTS TASKS TO VIEW
-
 }
 
 // sidebarButtons[0].addEventListener("click", allTasksEvent)

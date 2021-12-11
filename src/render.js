@@ -1,15 +1,24 @@
 import ToDoList from "./toDoList"
-import { removeAllChildren, createProjectListElement, createProjectArray, createTaskArray,filterTasksToday,filterTasksWeek } from "./utils"
+import {    removeAllChildren, 
+            createProjectListElement, 
+            createProjectArray, 
+            createTaskArray,
+            filterTasksToday,
+            filterTasksWeek,
+            sidebarButtons,
+            projectList,
+            viewContainer,
+            addButton,
+} from "./utils"
 
 
-export function renderTodoList(e,_todoList){
+export function renderTodoList(_todoList){
     if (!(_todoList instanceof ToDoList)) throw Error("Input is not a TodoList Instance")     
-    console.log(e)
+    // console.log(e)
     const sidebarUL = document.querySelector(".project-ul")
-    const mainView = document.querySelector(".view-container")
 
     removeAllChildren(sidebarUL)
-    removeAllChildren(mainView)
+    removeAllChildren(viewContainer)
 
 
     _todoList.projects.forEach((project)=>{
@@ -17,7 +26,7 @@ export function renderTodoList(e,_todoList){
         const viewListElements = createProjectArray(project)
 
         sidebarUL.appendChild(listElement)
-        viewListElements.forEach((e)=>mainView.appendChild(e))
+        viewListElements.forEach((el)=>viewContainer.appendChild(el))
     })
 
 }
@@ -30,19 +39,25 @@ export function renderTodoList(e,_todoList){
 //     }
 // }
 
-export function renderToday(e){
+export function renderToday(){
     let toRender = createTaskArray(filterTasksToday())
     if (toRender.length == 0) console.log("toRender empty")
-    const mainView = document.querySelector(".view-container")
-    removeAllChildren(mainView)
+    removeAllChildren(viewContainer)
 
-    toRender.forEach(el=>mainView.appendChild(el))
+    toRender.forEach(el=>viewContainer.appendChild(el))
 }
 
-export function renderWeek(e){
+export function renderWeek(){
     const toRender = createTaskArray(filterTasksWeek())
-    const mainView = document.querySelector(".view-container")
-    removeAllChildren(mainView)
 
-    toRender.forEach(el=>mainView.appendChild(el))
+    removeAllChildren(viewContainer)
+
+    toRender.forEach(el=>viewContainer.appendChild(el))
+}
+
+export function renderAProject(project){
+    const toRender = createProjectArray(project)
+    removeAllChildren(viewContainer)
+
+    toRender.forEach(el=>viewContainer.appendChild(el))
 }

@@ -96,11 +96,13 @@ export function createProjectArray(aProject){
 export function createProjectListElement(newProject){
     if (!(newProject instanceof Project)) throw Error("Input is not a Project Instance")
     const name = newProject.name
-    const listElement = createElement("li", ["project-li", `${name}-project`],`${name}`)
+    const listElement = createElement("li", ["project-li", `${name}-project`])
+    const projectLabel = createElement("p","project-name",`${name}`)
     const closeButton = createElement("span", "project-li-close")
     closeButton.innerHTML = "&times;"
+    listElement.appendChild(projectLabel)
     listElement.appendChild(closeButton)
-    listElement.setAttribute("data", `${newProject.projectId}`)
+    listElement.setAttribute("project-data", `${newProject.projectId}`)
     listElement.setAttribute("active", `false`)
 
     return listElement
@@ -152,18 +154,18 @@ export function filterTasksToday(_toDoList=defaultToDoList){
 //     return dummy
 // }
 
-export function testo(){
-    const tempToDo = new ToDoList()
-    let i = 0
-    for(const project of defaultToDoList.projects){
-        tempToDo.addProject(project)
-        const sa = defaultToDoList.projects[0].tasks.filter(t=>t.dueDate == "10.12.2021")
-        tempToDo.projects[i].tasks = sa
-        i++
-    }
+// export function testo(){
+//     const tempToDo = new ToDoList()
+//     let i = 0
+//     for(const project of defaultToDoList.projects){
+//         tempToDo.addProject(project)
+//         const sa = defaultToDoList.projects[0].tasks.filter(t=>t.dueDate == "10.12.2021")
+//         tempToDo.projects[i].tasks = sa
+//         i++
+//     }
 
-    return tempToDo
-}
+//     return tempToDo
+// }
 
 export function getCurrentWeek(){
     const curr = new Date()

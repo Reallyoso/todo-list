@@ -3,8 +3,8 @@ import Project from "./project"
 import ToDoList from "./toDoList.js"
 import * as utils from "./utils"
 import { sidebarButtons, projectList ,viewContainer, addButton} from "./utils"
-import {renderTodoList, renderToday, renderWeek} from "./render"
-import {allTasksEvent, addProjectToTodoListEvent, addTaskToProjectEvent} from "./eventHandlers"
+import {renderTodoList, renderToday, renderWeek, renderAProject} from "./render"
+import {allTasksEvent, addProjectToTodoListEvent, addTaskToProjectEvent, projectListClickEvent} from "./eventHandlers"
 
 const defaultTask = new Task("Default", "1.12.2021")
 const defaultTaskTwo = new Task("Default", "10.12.2021")
@@ -21,9 +21,22 @@ defaultProjectTwo.addTask(defaultTask)
 defaultToDoList.addProject(defaultProject)
 defaultToDoList.addProject(defaultProjectTwo)
 
+renderTodoList(defaultToDoList)
+
 // EventListeners Assignment START
 
-sidebarButtons[0].addEventListener("click",(e) => renderTodoList(e,defaultToDoList))
+const projectListElements = document.querySelectorAll(".project-li")
+projectListElements[0].firstElementChild.addEventListener("click", e=>{
+    console.log(e.target.parentElement.attributes["project-data"].value)
+    projectListClickEvent(e)
+    const dataValue = e.target.parentElement.attributes["project-data"].value
+
+    const projectToRender = defaultToDoList.projects[dataValue]
+
+    renderAProject(projectToRender)
+})
+
+sidebarButtons[0].addEventListener("click",(e) => renderTodoList(defaultToDoList))
 sidebarButtons[1].addEventListener("click", renderToday)
 sidebarButtons[2].addEventListener("click", renderWeek)
 sidebarButtons[3].addEventListener("click", addProjectToTodoListEvent)

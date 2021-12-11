@@ -63,3 +63,7 @@ p input {
     justify-content: space-between;
     align-items: center;
 }
+
+.project-name{
+    flex-grow: 1;
+}
