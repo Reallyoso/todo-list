@@ -26,15 +26,17 @@ renderTodoList(defaultToDoList)
 // EventListeners Assignment START
 
 const projectListElements = document.querySelectorAll(".project-li")
-projectListElements[0].firstElementChild.addEventListener("click", e=>{
-    console.log(e.target.parentElement.attributes["project-data"].value)
-    projectListClickEvent(e)
-    const dataValue = e.target.parentElement.attributes["project-data"].value
+// projectListElements[0].firstElementChild.addEventListener("click", e=>{
+//     console.log(e.target.parentElement.attributes["project-data"].value)
+//     projectListClickEvent(e)
+//     const dataValue = e.target.parentElement.attributes["project-data"].value
 
-    const projectToRender = defaultToDoList.projects[dataValue]
+//     const projectToRender = defaultToDoList.projects[dataValue]
 
-    renderAProject(projectToRender)
-})
+//     renderAProject(projectToRender)
+// })
+
+
 
 sidebarButtons[0].addEventListener("click",(e) => renderTodoList(defaultToDoList))
 sidebarButtons[1].addEventListener("click", renderToday)

@@ -10,7 +10,7 @@ import {    removeAllChildren,
             viewContainer,
             addButton,
 } from "./utils"
-
+import { onEnterBlur, onBlur } from "./eventHandlers"
 
 export function renderTodoList(_todoList){
     if (!(_todoList instanceof ToDoList)) throw Error("Input is not a TodoList Instance")     
@@ -39,6 +39,17 @@ export function renderTodoList(_todoList){
 //     }
 // }
 
+export function renderProjectList(_todoList){
+    const sidebarUL = document.querySelector(".project-ul")
+
+    removeAllChildren(sidebarUL)
+
+    _todoList.projects.forEach(project=>{
+        const listElement = createProjectListElement(project)
+        sidebarUL.appendChild(listElement)
+    })
+}
+
 export function renderToday(){
     let toRender = createTaskArray(filterTasksToday())
     if (toRender.length == 0) console.log("toRender empty")
@@ -58,6 +69,13 @@ export function renderWeek(){
 export function renderAProject(project){
     const toRender = createProjectArray(project)
     removeAllChildren(viewContainer)
+    toRender.forEach((el)=>{
+        if(el.classList.contains("task-container")){
+            el.childNodes.forEach((cn)=>{if(cn.classList.contains("task-name")) cn.contentEditable=true})
+            el.childNodes[0].addEventListener("keypress", onEnterBlur)
+            el.childNodes[0].addEventListener("blur", onBlur)
+        }
+    })
 
     toRender.forEach(el=>viewContainer.appendChild(el))
 }

@@ -7,6 +7,7 @@ import {    checkProjectListForActiveProject,
             removeAllChildren
 } from "./utils";
 
+import { renderAProject, renderToday, renderProjectList } from "./render";
 
 export function addTaskToProjectEvent(e){
     const taskName = prompt("Please enter TaskName: ")
@@ -18,12 +19,12 @@ export function addTaskToProjectEvent(e){
     console.log(activeProject)
 
     if (activeProject){
-        const projectId = activeProject.attributes.data.value
+        const projectId = activeProject.attributes["project-data"].value
         const projectObject = defaultToDoList["projects"][projectId]
         projectObject.addTask(newTask)
         console.log("task added succesfully")
 
-        // RENDER TASK TO VIEW OF PROJECT
+        renderAProject(defaultToDoList.projects[projectId])
     }else console.log("no active project found")
 }
 
@@ -32,7 +33,17 @@ export function addProjectToTodoListEvent(e){
     const projectName = prompt("Enter Project Name: ")
     const newProject = new Project(projectName)
 
+    
+
     defaultToDoList.addProject(newProject)
+    renderProjectList(defaultToDoList)
+    renderAProject(newProject)
+
+    const projectListElements = Array.from(document.querySelector(".project-ul").children)
+
+    // SET ACTIVE VALUE FOR EVERYTHING TO FALSE THEN FOR NEWLY RENDERED PROJECT TO TRUE
+    projectListElements.forEach((el)=>el.attributes["active"].value = "false")
+    projectListElements.at(-1).attributes.active.value = "true"
 
 }
 
@@ -46,13 +57,39 @@ export function allTasksEvent(e){
 }
 
 export function projectListClickEvent(e){
-    if(e.target.tagName == "SPAN") return console.log("span")
+    if(e.target.tagName == "SPAN") {
+        return console.log("span")
+    }
+
+    if(e.type == "dblclick") {
+        return console.log("dblclick event fired")
+    }
     const projectListElements = Array.from(document.querySelector(".project-ul").children)
     projectListElements.forEach((el)=>el.attributes["active"].value = "false")
+    const dataValue = e.target.parentElement.attributes["project-data"].value
+    const projectToRender = defaultToDoList.projects[dataValue]
     e.target.parentElement.attributes.active.value = "true"
+    renderAProject(projectToRender)
     // NEEDS TO CONTAIN LOGIC TO RENDER ONLY THE PROJECTS TASKS TO VIEW
 }
 
 // sidebarButtons[0].addEventListener("click", allTasksEvent)
 // sidebarButtons[3].addEventListener("click", addProjectToTodoListEvent)
 // addButton.addEventListener("click", addTaskToProjectEvent)
+
+
+export function onBlur(e){
+    console.log(e.target.textContent)
+    const changedText = e.target.textContent
+    const projectId = e.target.parentElement.attributes["project-id"].value
+    const taskId = e.target.parentElement.attributes["task-id"].value
+    // changes the objects name value 
+    // defaultToDoList.projects[projectId].tasks[taskId].name = changedText
+}
+
+export function onEnterBlur(e){
+    if(e.key === "Enter"){
+        e.preventDefault()
+        e.target.blur()
+    }
+}
