@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <script src="main.js" defer></script>
-    <link rel="stylesheet" href="../src/style.css">
+    <meta charset="utf-8"/>
+    <title>WHAT DO?!</title>
+    <script type="text/javascript" src="main.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="../src/style.css">
+    <link rel="stylesheet" type="text/css" href="../src/modal.css">
 </head>
 <body>
     <header>
@@ -36,9 +35,53 @@
 
         </div>
             <button id="add-task">+</button>
-
-
     </div>
+
+<div id="addTaskModal" class="modal">
+
+  <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Add A Task</h2>
+      </div>
+      <div class="modal-body">
+        <form id="task-form" action="" onsubmit="return false">  
+            <p>Task Name</p>
+            <input id="task-name-input" type="text" name="" placeholder="MyTaskName" required>
+            <p>Due Date</p>
+            <input id="task-date-input" type="date" name="" required>
+            <input id="task-submit" type="submit" name="">
+        </form>  
+      </div>
+      <div class="modal-footer">
+        <h3></h3>
+      </div>
+    </div>
+
+</div>
+
+<div id="addProjectModal" class="modal">
+
+    <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Add A Project</h2>
+        </div>
+        <div class="modal-body">
+          <form id="project-form" action="" onsubmit="return false">  
+              <p>Project Name</p>
+              <input id="project-name-input" type="text" name="" placeholder="MyProjectName" required>
+              <input id="project-submit" type="submit" name="">
+          </form>  
+        </div>
+        <div class="modal-footer">
+          <h3></h3>
+        </div>
+      </div>
+  
+  </div>
 
     <footer>
         <!-- https://stackoverflow.com/questions/3392493/adjust-width-of-input-field-to-its-input/41389961 -->
