@@ -102,3 +102,22 @@ p input {
   width: auto;
   background-color: blue;
 }
+
+
+input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+
+input[type="date"]{
+    border: none;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.datetime-reset-button{
+    display: hidden;
+    color:red;
+}
+
+#reset-button{
+    display:none;
+}

@@ -74,6 +74,7 @@ export function createTaskArray(taskArr){
             const creationDate = createElement("p",`${element.name}-paragraph task-text task-creationdate`, `${element.creationDate}`)
             const taskTextDueDate = createElement("input", `${element.name}-paragraph task-text task-duedate`)
             taskTextDueDate.type = "date"
+            taskTextDueDate.setAttribute("required","")
             taskTextDueDate.value = `${element.dueDate.toISOString().split("T")[0]}`
             const taskTextIsDone = createElement("p", `${element.name}-paragraph task-text task-isdone`, `${element.isDone}`)
             
@@ -146,7 +147,7 @@ export function filterTasksToday(_toDoList=defaultToDoList){
     const dateToday = new Date().toLocaleDateString("de-DE")
     const allTasksToday = allTasks.filter((e)=>{
         if(e == null || e == undefined) return
-        if(e.dueDate == dateToday) return true
+        if(e.dueDate.toLocaleDateString("de-DE") == dateToday) return true
     })
     return allTasksToday
 }
@@ -226,7 +227,7 @@ export function filterTasksWeek(_toDoList = defaultToDoList){
     
     const allTasksWeek = allTasks.filter((t)=>{
         if(t == null || t == undefined) return
-        if (utils.isCurrentWeek(new Date(t.dueDate.split(".").reverse().join("/")).getTime())) return true
+        if (utils.isCurrentWeek(new Date(t.dueDate).getTime())) return true
     })
     
     return allTasksWeek

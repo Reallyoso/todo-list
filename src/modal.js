@@ -54,7 +54,7 @@ window.onclick = function(event) {
 export function onFormSubmit(e){
     if(e.target.id == "task-form"){
         const taskName = e.target[0].value
-        const taskDueDate = e.target[1].value.split("-").reverse().join(".")
+        const taskDueDate = e.target[1].value
         modalOne.style.display = "none"
         clearModalInputs()
 
