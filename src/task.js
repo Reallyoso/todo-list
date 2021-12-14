@@ -2,9 +2,9 @@ export default class Task{
     constructor(name, dueDate){
         this.name = name
         // maybe add id
-        this.creationDate = new Date().toLocaleDateString("de-DE")
+        this.creationDate = new Date().toLocaleDateString()
         this.creationDateEpoch = new Date().getTime()
-        this.dueDate = dueDate
+        this.dueDate = new Date(dueDate)
         this.isDone = false
     }
 

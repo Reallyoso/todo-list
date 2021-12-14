@@ -9,8 +9,9 @@ import {    removeAllChildren,
             projectList,
             viewContainer,
             addButton,
+            createElement,
 } from "./utils"
-import { onEnterBlur, onBlur } from "./eventHandlers"
+import { onEnterBlur, onBlur, removeTaskFromProjectEvent } from "./eventHandlers"
 
 export function renderTodoList(_todoList){
     if (!(_todoList instanceof ToDoList)) throw Error("Input is not a TodoList Instance")     
@@ -20,13 +21,15 @@ export function renderTodoList(_todoList){
     removeAllChildren(sidebarUL)
     removeAllChildren(viewContainer)
     addButton.remove()
-
+    renderProjectList(_todoList)
 
     _todoList.projects.forEach((project)=>{
-        const listElement = createProjectListElement(project) 
+        if(project == null) return
+        // const listElement = createProjectListElement(project) 
+        
         const viewListElements = createProjectArray(project)
 
-        sidebarUL.appendChild(listElement)
+        // sidebarUL.appendChild(listElement)
         viewListElements.forEach((el)=>viewContainer.appendChild(el))
     })
 
@@ -46,7 +49,9 @@ export function renderProjectList(_todoList){
     removeAllChildren(sidebarUL)
 
     _todoList.projects.forEach(project=>{
+        if(project == null) return
         const listElement = createProjectListElement(project)
+        // listElement.firstElementChild.addEventListener("blur",(e)=>console.log(e))
         sidebarUL.appendChild(listElement)
     })
 }
@@ -69,8 +74,19 @@ export function renderWeek(){
     toRender.forEach(el=>viewContainer.appendChild(el))
 }
 
-export function renderAProject(project){
+export function renderAProject(project, addClose = false){
     const toRender = createProjectArray(project)
+    if(addClose){
+       
+        toRender.forEach((tasklist)=>{
+            if(tasklist.classList.contains("task-container")){
+                const closeButton = createElement("span", "project-task-delete")
+                closeButton.innerHTML = "&times;"
+                closeButton.addEventListener("click", removeTaskFromProjectEvent)
+                tasklist.appendChild(closeButton)
+            }
+        })
+    }
     removeAllChildren(viewContainer)
     document.querySelector("#content-container").appendChild(utils.addButton)
     toRender.forEach((el)=>{

@@ -7,6 +7,8 @@ export const sidebarButtons = document.querySelectorAll(".sidebar-button")
 export const projectList = document.querySelector(".project-ul")
 export const viewContainer = document.querySelector(".view-container")
 export const addButton = document.getElementById("add-task")
+export const addTaskModal = document.getElementById("addTaskModal")
+export const addProjectModal = document.getElementById("addProjectModal")
 
 
 export function createElement(name, classToAdd, elementTextContent = ""){
@@ -70,8 +72,11 @@ export function createTaskArray(taskArr){
             const mainListElement = createElement("li", ["task-container"])
             const taskTextName = createElement("p", `${element.name}-paragraph task-text task-name`, `${element.name}`)
             const creationDate = createElement("p",`${element.name}-paragraph task-text task-creationdate`, `${element.creationDate}`)
-            const taskTextDueDate = createElement("p", `${element.name}-paragraph task-text task-duedate`, `${element.dueDate}`)
+            const taskTextDueDate = createElement("input", `${element.name}-paragraph task-text task-duedate`)
+            taskTextDueDate.type = "date"
+            taskTextDueDate.value = `${element.dueDate.toISOString().split("T")[0]}`
             const taskTextIsDone = createElement("p", `${element.name}-paragraph task-text task-isdone`, `${element.isDone}`)
+            
             mainListElement.appendChild(taskTextName)
             mainListElement.appendChild(creationDate)
             mainListElement.appendChild(taskTextDueDate)
@@ -85,9 +90,10 @@ export function createTaskArray(taskArr){
 
 
 export function createProjectArray(aProject){
-    if(!(aProject instanceof Project)){
+    if(!(aProject instanceof Project) && aProject != null){
         throw Error("Not a Instance of Project")
     }
+    if(aProject == null) return
     const domElementArray = createTaskArray(aProject.tasks)
     const heading = createElement("h1", `view-project-heading`,`${aProject.name}`)
     domElementArray.unshift(heading)
@@ -102,7 +108,8 @@ export function createProjectArray(aProject){
     }
     
 export function createProjectListElement(newProject){
-    if (!(newProject instanceof Project)) throw Error("Input is not a Project Instance")
+    if (!(newProject instanceof Project) && newProject != null) throw Error("Input is not a Project Instance")
+    if(newProject == null) return
     const name = newProject.name
     const listElement = createElement("li", ["project-li", `${name}-project`])
     const projectLabel = createElement("p","project-name",`${name}`)

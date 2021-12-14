@@ -26,8 +26,8 @@ export default class Project{
         this.tasks.push(newTask)
     }
 
-    removeTask(taskToRemove){
-        // remove task from this.tasks
+    removeTask(taskToRemoveId){
+        this.tasks.splice(taskToRemoveId, 1)
     }
 
 }

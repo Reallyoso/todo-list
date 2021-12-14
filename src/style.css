@@ -4,10 +4,12 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: sans-serif;
 }
 
 header{
     background-color: grey;
+    text-align: center;
 }
 
 p{
@@ -21,28 +23,71 @@ ul, li{
     list-style: none;
 }
 
+.sidebar-container{
+    width: 20%;
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.sidebar-button{
+    width: 80%;
+    padding: 4px;
+    margin: 3px;
+}
+
+.project-ul{
+    width: 100%
+}
+.project-li{
+    cursor: pointer;
+}
+.project-li[active = true]{
+    background-color: red;
+}
+
+.project-name{
+    /* user-select: none; */
+    flex-grow: 1;
+}
+
+.project-li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 #content-container{
     flex-grow: 1;
     display: flex;
 }
 
-.sidebar-container{
-    width: 20%;
-    background-color: green;
-    display: flex;
-    flex-direction: column;
-}
 
 .view-container{
     flex-grow: 1;
 }
 
+.view-project-heading{
+    text-align: center;
+}
+
 .task-container{
     display: flex;
     justify-content: space-between;
+
+}
+
+.task-container p{
+    width: 15%;
+    word-wrap: break-word;
 }
 
 footer{
+    text-align: center;
     background-color: grey;
 }
 
@@ -56,14 +101,4 @@ p input {
   padding: none;
   width: auto;
   background-color: blue;
-}
-
-.project-li{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.project-name{
-    flex-grow: 1;
 }
