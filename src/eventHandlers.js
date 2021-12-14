@@ -7,7 +7,7 @@ import {    checkProjectListForActiveProject,
             removeAllChildren
 } from "./utils";
 
-import { renderAProject, renderToday, renderProjectList } from "./render";
+import { renderAProject, renderToday, renderProjectList, renderWeek } from "./render";
 
 export function addTaskToProjectEvent(e){
     const taskName = prompt("Please enter TaskName: ")
@@ -54,6 +54,16 @@ export function allTasksEvent(e){
     const allProjectTaskArray = defaultToDoList.allTasks()
     createTaskArray(allProjectTaskArray).forEach((e)=>viewContainer.appendChild(e))
     console.log("rendered")
+}
+
+export function thisWeekEvent(e){
+    document.querySelectorAll(".project-li").forEach((e)=>e.attributes.active.value = "false")
+    renderWeek()
+}
+
+export function todayEvent(e){
+    document.querySelectorAll(".project-li").forEach((e)=>e.attributes.active.value = "false")
+    renderToday()
 }
 
 export function projectListClickEvent(e){

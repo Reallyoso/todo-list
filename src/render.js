@@ -19,6 +19,7 @@ export function renderTodoList(_todoList){
 
     removeAllChildren(sidebarUL)
     removeAllChildren(viewContainer)
+    addButton.remove()
 
 
     _todoList.projects.forEach((project)=>{
@@ -54,6 +55,7 @@ export function renderToday(){
     let toRender = createTaskArray(filterTasksToday())
     if (toRender.length == 0) console.log("toRender empty")
     removeAllChildren(viewContainer)
+    addButton.remove()
 
     toRender.forEach(el=>viewContainer.appendChild(el))
 }
@@ -62,6 +64,7 @@ export function renderWeek(){
     const toRender = createTaskArray(filterTasksWeek())
 
     removeAllChildren(viewContainer)
+    addButton.remove()
 
     toRender.forEach(el=>viewContainer.appendChild(el))
 }
@@ -69,6 +72,7 @@ export function renderWeek(){
 export function renderAProject(project){
     const toRender = createProjectArray(project)
     removeAllChildren(viewContainer)
+    document.querySelector("#content-container").appendChild(utils.addButton)
     toRender.forEach((el)=>{
         if(el.classList.contains("task-container")){
             el.childNodes.forEach((cn)=>{if(cn.classList.contains("task-name")) cn.contentEditable=true})

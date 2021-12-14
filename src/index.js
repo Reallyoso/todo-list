@@ -4,7 +4,8 @@ import ToDoList from "./toDoList.js"
 import * as utils from "./utils"
 import { sidebarButtons, projectList ,viewContainer, addButton} from "./utils"
 import {renderTodoList, renderToday, renderWeek, renderAProject} from "./render"
-import {allTasksEvent, addProjectToTodoListEvent, addTaskToProjectEvent, projectListClickEvent} from "./eventHandlers"
+import {allTasksEvent, addProjectToTodoListEvent, addTaskToProjectEvent, projectListClickEvent,
+        thisWeekEvent, todayEvent,} from "./eventHandlers"
 
 const defaultTask = new Task("Default", "1.12.2021")
 const defaultTaskTwo = new Task("Default", "10.12.2021")
@@ -39,8 +40,8 @@ const projectListElements = document.querySelectorAll(".project-li")
 
 
 sidebarButtons[0].addEventListener("click",(e) => renderTodoList(defaultToDoList))
-sidebarButtons[1].addEventListener("click", renderToday)
-sidebarButtons[2].addEventListener("click", renderWeek)
+sidebarButtons[1].addEventListener("click", todayEvent)
+sidebarButtons[2].addEventListener("click", thisWeekEvent)
 sidebarButtons[3].addEventListener("click", addProjectToTodoListEvent)
 addButton.addEventListener("click", addTaskToProjectEvent)
 
