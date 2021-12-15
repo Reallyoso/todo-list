@@ -121,7 +121,7 @@ export function onBlur(e){
     const projectId = e.target.parentElement.attributes["project-id"].value
     const taskId = e.target.parentElement.attributes["task-id"].value
     // changes the objects name value 
-    defaultToDoList.projects[projectId].setName(changedText)
+    defaultToDoList.projects[projectId].tasks[taskId].setName(changedText)
 }
 
 export function onEnterBlur(e){
