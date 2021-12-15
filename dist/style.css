@@ -120,7 +120,6 @@ input[type="date"]{
 input[type="date"]:focus{
     outline: none;
     user-select: none;
-    highlight: none;
 }
 
 input[type="date"]::-moz-selection{
