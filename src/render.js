@@ -11,7 +11,7 @@ import {    removeAllChildren,
             addButton,
             createElement,
 } from "./utils"
-import { onEnterBlur, onBlur, removeTaskFromProjectEvent } from "./eventHandlers"
+import { onEnterBlur, onBlur, removeTaskFromProjectEvent, dateBlur } from "./eventHandlers"
 
 export function renderTodoList(_todoList){
     if (!(_todoList instanceof ToDoList)) throw Error("Input is not a TodoList Instance")     
@@ -28,6 +28,15 @@ export function renderTodoList(_todoList){
         // const listElement = createProjectListElement(project) 
         
         const viewListElements = createProjectArray(project)
+        
+        viewListElements.forEach((el)=>{
+            if(el.classList.contains("task-container")){
+                el.childNodes.forEach((cn)=>{if(cn.classList.contains("task-name")) cn.contentEditable=true})
+                el.childNodes[0].addEventListener("keypress", onEnterBlur)
+                el.childNodes[0].addEventListener("blur", onBlur)
+                el.childNodes[2].addEventListener("blur", dateBlur)
+            }
+        })
 
         // sidebarUL.appendChild(listElement)
         viewListElements.forEach((el)=>viewContainer.appendChild(el))
@@ -58,6 +67,8 @@ export function renderProjectList(_todoList){
 
 export function renderToday(){
     let toRender = createTaskArray(filterTasksToday())
+    //set input datepicker to disabled bcs cba date picker is place 2 in taskarray, needs changing if taskarray changes
+    toRender.forEach((task)=>task.childNodes[2].disabled = true) 
     if (toRender.length == 0) console.log("toRender empty")
     removeAllChildren(viewContainer)
     addButton.remove()
@@ -67,6 +78,9 @@ export function renderToday(){
 
 export function renderWeek(){
     const toRender = createTaskArray(filterTasksWeek())
+    
+    //set input datepicker to disabled bcs cba date picker is place 2 in taskarray, needs changing if taskarray changes
+    toRender.forEach((task)=>task.childNodes[2].disabled = true) 
 
     removeAllChildren(viewContainer)
     addButton.remove()
@@ -94,6 +108,7 @@ export function renderAProject(project, addClose = false){
             el.childNodes.forEach((cn)=>{if(cn.classList.contains("task-name")) cn.contentEditable=true})
             el.childNodes[0].addEventListener("keypress", onEnterBlur)
             el.childNodes[0].addEventListener("blur", onBlur)
+            el.childNodes[2].addEventListener("blur", dateBlur)
         }
     })
 

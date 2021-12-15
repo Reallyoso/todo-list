@@ -130,3 +130,11 @@ export function onEnterBlur(e){
         e.target.blur()
     }
 }
+
+export function dateBlur(e){
+    const newDate = e.target.value
+    const projectId = e.target.parentElement.attributes["project-id"].value
+    const taskId = e.target.parentElement.attributes["task-id"].value
+    defaultToDoList.projects[projectId].tasks[taskId].setDueDate(newDate)
+
+}

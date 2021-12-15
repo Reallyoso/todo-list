@@ -103,10 +103,10 @@ export function createProjectArray(aProject){
         if(e.classList.contains("task-container")){
             e.setAttribute("task-id", `${i-1}`)
         }
-        e.classList.add(`${aProject.name}`)})
-
+        e.classList.add(`${aProject.name.split(" ").join("-")}`)
+    })
         return domElementArray
-    }
+}
     
 export function createProjectListElement(newProject){
     if (!(newProject instanceof Project) && newProject != null) throw Error("Input is not a Project Instance")

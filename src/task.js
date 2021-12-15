@@ -25,7 +25,7 @@ export default class Task{
     }
 
     setDueDate(date){
-        // set date after checking input
+        this.dueDate = new Date(date)
     }
 
     getDueDate(){

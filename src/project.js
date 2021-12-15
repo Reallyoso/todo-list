@@ -1,6 +1,7 @@
 export default class Project{
 
     constructor(projectName){
+        // this.unsanitizedName = projectName
         this.name = projectName
         this.projectId = Project.incrementId()
         this.creationDate = new Date().toLocaleDateString("de-DE")
@@ -12,6 +13,12 @@ export default class Project{
         if (!this.latestId && this.latestId != 0) this.latestId = 0
         else this.latestId++
         return this.latestId
+    }
+
+    sanitizeName(name){
+        if(name.includes(" ")){
+            return name.split(" ").join("-")
+        }else return name
     }
 
     setName(name){
