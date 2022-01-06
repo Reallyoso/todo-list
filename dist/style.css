@@ -52,6 +52,8 @@ ul, li{
 .project-name{
     /* user-select: none; */
     flex-grow: 1;
+    box-sizing: border-box;
+    padding: 4px;
 }
 
 .project-li{

@@ -16,20 +16,17 @@ export function addTaskToProjectEvent(e){
     const newTask = new Task(taskName, taskDueDate)
     // check for active project
     const activeProject = checkProjectListForActiveProject()
-    console.log(activeProject)
 
     if (activeProject){
         const projectId = activeProject.attributes["project-data"].value
         const projectObject = defaultToDoList["projects"][projectId]
         projectObject.addTask(newTask)
-        console.log("task added succesfully")
 
         renderAProject(defaultToDoList.projects[projectId])
-    }else console.log("no active project found")
+    }
 }
 
 export function addProjectToTodoListEvent(e){
-    console.log(e)
     const projectName = prompt("Enter Project Name: ")
     const newProject = new Project(projectName)
 
@@ -53,7 +50,6 @@ export function allTasksEvent(e){
     removeAllChildren(viewContainer)
     const allProjectTaskArray = defaultToDoList.allTasks()
     createTaskArray(allProjectTaskArray).forEach((e)=>viewContainer.appendChild(e))
-    console.log("rendered")
 }
 
 export function thisWeekEvent(e){
@@ -68,7 +64,6 @@ export function todayEvent(e){
 
 export function projectListClickEvent(e){
     if(e.target.tagName == "SPAN") {
-        // return console.log("span")
         const conf = confirm("Are You Sure?")
         if(conf){
             const deletionDataValue = e.target.parentElement.attributes["project-data"].value
